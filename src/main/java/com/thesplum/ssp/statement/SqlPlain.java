@@ -1,7 +1,7 @@
 package com.thesplum.ssp.statement;
 
-public abstract class SqlPlain {
 
+public abstract class SqlPlain {
     private String content;
 
     public SqlPlain() {

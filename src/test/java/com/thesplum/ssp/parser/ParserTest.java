@@ -9,7 +9,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import com.thesplum.ssp.parser.tokenizer.Token;
+import com.thesplum.ssp.parser.tokenizer.Tokenizer;
 import com.thesplum.ssp.parser.tokenizer.TypeToken;
+import com.thesplum.ssp.statement.dml.SelectStatement;
 
 public class ParserTest {
     Parser parser = new Parser();
@@ -59,5 +61,17 @@ public class ParserTest {
         for (Token test : tests) {
             assertEquals(test, parser.identifyToken(test.getText()));
         }
+    }
+
+    @Test
+    void identifyStatementTest() {
+        String query = "SELECT name FROM Cars c WHERE model='Newer sport'";
+        ArrayList<Token> tokens = new ArrayList<>();
+
+        for (String s : Tokenizer.getTokens(query)) {
+            tokens.add(parser.identifyToken(s));
+        }
+
+        assertTrue(parser.identifyStatement(tokens) instanceof SelectStatement);
     }
 }
