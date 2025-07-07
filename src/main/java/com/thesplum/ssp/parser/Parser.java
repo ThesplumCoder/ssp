@@ -1,6 +1,8 @@
 package com.thesplum.ssp.parser;
 
 import com.thesplum.ssp.statement.Statement;
+import com.thesplum.ssp.statement.dml.SelectStatement;
+
 import static com.thesplum.ssp.parser.TextUtils.cleanStatement;
 
 import java.util.ArrayList;
@@ -17,15 +19,15 @@ import com.thesplum.ssp.parser.tokenizer.TypeToken;
 public final class Parser implements TokenParser {
 
     public Statement parseStatement(String statement) {
-        Statement res = null;
         String stmt = cleanStatement(statement);
         LinkedList<String> plainTokens = Tokenizer.getTokens(stmt);
+        LinkedList<Token> tokens = new LinkedList<>();
         
-        // Identify the tokens.
+        for (String str : plainTokens) {
+            tokens.add(identifyToken(str));
+        }
 
-        // Construct the statement.
-
-        return res;
+        return new SelectStatement(tokens);
     }
 
     @Override

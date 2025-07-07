@@ -1,11 +1,15 @@
 package com.thesplum.ssp.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
+
+import com.thesplum.ssp.parser.tokenizer.Token;
+import com.thesplum.ssp.parser.tokenizer.TypeToken;
 
 public class ParserTest {
     Parser parser = new Parser();
@@ -39,6 +43,21 @@ public class ParserTest {
 
         for (String test : tests) {
             assertTrue(parser.isSymbol(test));
+        }
+    }
+
+    @Test
+    void identifyTokenTest() {
+        ArrayList<Token> tests = new ArrayList<>(
+            Arrays.<Token>asList(new Token("select", TypeToken.KEYWORD), 
+                                new Token("by", TypeToken.KEYWORD), 
+                                new Token("id", TypeToken.VALUE), 
+                                new Token("AVG", TypeToken.FUNCTION),
+                                new Token("@", TypeToken.SYMBOL))
+        );
+
+        for (Token test : tests) {
+            assertEquals(test, parser.identifyToken(test.getText()));
         }
     }
 }

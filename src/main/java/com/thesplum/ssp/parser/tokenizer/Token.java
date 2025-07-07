@@ -42,4 +42,14 @@ public class Token {
     public TypeToken getTypeToken() {
         return typeToken;
     }
+
+    @Override
+    public boolean equals(Object otherToken) {
+        Token t = (Token) otherToken;
+        if (text.equals(t.getText()) && typeToken.equals(t.getTypeToken())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
