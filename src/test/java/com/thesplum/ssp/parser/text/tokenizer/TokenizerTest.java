@@ -1,4 +1,4 @@
-package com.thesplum.ssp.parser.tokenizer;
+package com.thesplum.ssp.parser.text.tokenizer;
 
 import java.util.Arrays;
 import java.util.LinkedList;

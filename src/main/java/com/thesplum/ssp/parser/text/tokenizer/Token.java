@@ -1,4 +1,4 @@
-package com.thesplum.ssp.parser.tokenizer;
+package com.thesplum.ssp.parser.text.tokenizer;
 
 /**
  * Models the form of each token found by parser.

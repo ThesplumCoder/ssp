@@ -1,4 +1,4 @@
-package com.thesplum.ssp.parser.tokenizer;
+package com.thesplum.ssp.parser.text.tokenizer;
 
 import java.util.LinkedList;
 import java.util.regex.Matcher;

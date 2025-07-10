@@ -1,4 +1,4 @@
-package com.thesplum.ssp.parser.tokenizer;
+package com.thesplum.ssp.parser.text.tokenizer;
 
 /**
  * Define the type of tokens can be.
