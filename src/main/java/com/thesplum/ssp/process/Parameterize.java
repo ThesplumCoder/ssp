@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
-import com.thesplum.ssp.automata.SpaceAutomata;
+import com.thesplum.ssp.automata.implementation.SpaceAutomata;
 
 import static com.thesplum.ssp.parser.text.TextUtils.cleanStatement;
 
