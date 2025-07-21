@@ -1,11 +1,12 @@
 package com.thesplum.ssp.process;
 
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
-
-import com.thesplum.ssp.automata.implementation.SpaceAutomata;
-
+import com.thesplum.ssp.automata.implementation.SpaceAutomataOperator;
+import com.thesplum.ssp.automata.model.ResultAutomata;
+import com.thesplum.ssp.automata.model.State;
 import static com.thesplum.ssp.parser.text.TextUtils.cleanStatement;
 
 public final class Parameterize {
@@ -52,18 +53,39 @@ public final class Parameterize {
      * @return Statement with only necesary spaces between elements.
      */
     public static String adjustSpaces(String statement) {
-        SpaceAutomata sp = new SpaceAutomata();
-        StringBuilder sb = new StringBuilder();
+        SpaceAutomataOperator sap = new SpaceAutomataOperator();
+        
+        StringBuilder res = new StringBuilder(statement);
+        while (true) {
+            ResultAutomata ra = sap.history(res.toString());
+            if (ra.getAcceptance()) {
+                break;
+            } else {
+                boolean reachedError = false;
+                List<State> states = ra.getHistory();
 
-        for (char c : statement.toCharArray()) {
-            sp.transition(c);
-            if (sp.isAccept()) {
-                sb.append(c);
+                res.setLength(0);
+                for (State s : states) {
+                    char stateChar = s.getInput();
+                    if (!reachedError && s.getId() == 4) {
+                        if (stateChar == ',') {
+                            res.deleteCharAt(res.length() - 1);
+                            reachedError = true;
+                        } else if (stateChar == ' ') {
+                            reachedError = true;
+                            continue;
+                        } else {
+                            res.append(' ');
+                            reachedError = true;
+                        }
+                    }
+                    res.append(stateChar);
+                }
             }
         }
 
-        return sb.toString();
-    } 
+        return res.toString();
+    }
 
     class ParameterAutomata {
         private int[] acceptState = {1, 2, 3, 6};

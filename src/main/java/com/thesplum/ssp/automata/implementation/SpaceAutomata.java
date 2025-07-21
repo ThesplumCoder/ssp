@@ -6,10 +6,11 @@ import java.util.stream.IntStream;
 import com.thesplum.ssp.automata.model.AutomataActions;
 
 public class SpaceAutomata implements AutomataActions {
-    private final int INITIAL = 1;
-    private final int[] ACCEPT_STATES = {1, 3, 5, 7, 8, 9};
+    static final int[] ACCEPT_STATES = {1, 3, 5, 7, 8, 9};
+    static final int INITIAL = 1;
+    
     private final Predicate<String> SET_1 = Pattern.compile("[\\w]").asPredicate();
-    private final Predicate<String> SET_2 = Pattern.compile("[.@/$%]").asPredicate();
+    private final Predicate<String> SET_2 = Pattern.compile("[.@/$%-]").asPredicate();
     private final Predicate<String> SET_3 = Pattern.compile("[<>=!]").asPredicate();
     private final Predicate<String> SET_4 = Pattern.compile("[\\s]").asPredicate();
     private final Predicate<String> SET_5 = Pattern.compile("[']").asPredicate();
@@ -31,7 +32,7 @@ public class SpaceAutomata implements AutomataActions {
      * Map the input to any following set:
      * 
      * + 1 -> {a-z, A-Z, 0-9}
-     * + 2 -> {., @, /, $, %}
+     * + 2 -> {., @, /, $, %, -}
      * + 3 -> {<, >, =, !}
      * + 4 -> Whitespace
      * + 5 -> {'}

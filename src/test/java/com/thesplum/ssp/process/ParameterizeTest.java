@@ -20,7 +20,7 @@ public class ParameterizeTest {
             "car.id = ?", 
             "car.seats > ? AND car.tires = ?", 
             "car.owner = ? AND car.registry = ?", 
-            "SELECT name FROM Cars c WHERE model=?");
+            "SELECT name FROM Cars c WHERE model = ?");
 
         Iterator<String> testsIter = tests.iterator();
         Iterator<String> expectIter = expected.iterator();
@@ -34,15 +34,17 @@ public class ParameterizeTest {
     void adjustSpacesTest() {
         List<String> tests = Arrays.<String>asList(
             "car.id  = 1",
+            "id, owner , tires",
             "car.seats > 4    AND car.tires =  4", 
             "car.owner =  'William Shakespeare' AND car.registry = '  AAA-111'", 
             "SELECT name FROM Cars c WHERE model='Newer sport'"
         );
         List<String> expected = Arrays.<String>asList(
             "car.id = 1",
+            "id, owner, tires",
             "car.seats > 4 AND car.tires = 4", 
             "car.owner = 'William Shakespeare' AND car.registry = '  AAA-111'", 
-            "SELECT name FROM Cars c WHERE model='Newer sport'"
+            "SELECT name FROM Cars c WHERE model = 'Newer sport'"
         );
 
         Iterator<String> testsIter = tests.iterator();

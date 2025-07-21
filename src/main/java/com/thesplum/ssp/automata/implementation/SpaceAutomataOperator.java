@@ -2,7 +2,6 @@ package com.thesplum.ssp.automata.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.thesplum.ssp.automata.model.AutomataOperator;
 import com.thesplum.ssp.automata.model.ResultAutomata;
 import com.thesplum.ssp.automata.model.State;
@@ -22,5 +21,17 @@ public final class SpaceAutomataOperator implements AutomataOperator<SpaceAutoma
 
         return new ResultAutomata(sa.isAccept(), hist);
     }
-    
+
+    @Override
+    public boolean checkAcceptance(State state) {
+        boolean checker = false;
+        int actual = state.getId();
+        for(int accept : SpaceAutomata.ACCEPT_STATES) {
+            if (accept == actual) {
+                checker = true;
+                break;
+            }
+        }
+        return checker;
+    }
 }
