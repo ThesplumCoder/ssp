@@ -16,7 +16,9 @@ public class SpaceAutomataOperatorTest {
     void historyTest() {
         List<String> positiveTest = Arrays.asList(
             "SELECT a, b, c FROM Words WHERE a LIKE 'Carl%';", 
-            "car.tires > 4");
+            "car.tires > 4", 
+            "SELECT a, b, c FROM Words WHERE a = 'árbol'"
+        );
 
         List<String> negativeTest = Arrays.asList(
             "car.seats > 4    AND car.tires =  4", 
